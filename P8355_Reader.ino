@@ -138,7 +138,12 @@ void loop() {
   } else {
     int tmp = !digitalRead(startButton);
     delay(50); //switch debounce.
-    if (tmp == !digitalRead(startButton)) go = 1;
+    if (tmp == !digitalRead(startButton)) {
+      digitalWrite(rst, HIGH);
+      delay(100); //100ms wait while the chip sorts itself out
+      digitalWrite(rst, LOW);
+      go = 1;
+    }
   }
   delay(1);
 }
